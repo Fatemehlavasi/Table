@@ -19,6 +19,8 @@ function render(data = []) {
       td.innerText = user[key];
       row.appendChild(td);
     }
+
+    // add action colum
     const td = document.createElement("td");
     //  add Delete button
     const deleteButton = document.createElement("button");
@@ -28,19 +30,19 @@ function render(data = []) {
       deleteUser(user.id);
     });
     //  add Update button
-    // const updateButton = document.createElement("button");
-    // updateButton.classList.add("btn", "btn-success");
-    // updateButton.innerText = "UPDATE";
-    // updateButton.addEventListener("click", function (e) {
-    //   submit.value = "update";
-    //   const row = e.target.parentElement.parentElement;
-    //   for (let i = 0; i < row.childNodes.length - 1; i++) {
-    //     const input = document.getElementById(keys[i]);
-    //     input.value = row.childNodes[i].innerText;
-    //   }
-    // });
+    const updateButton = document.createElement("button");
+    updateButton.classList.add("btn", "btn-success");
+    updateButton.innerText = "UPDATE";
+    updateButton.addEventListener("click", function (e) {
+      submit.value = "update";
+      const row = e.target.parentElement.parentElement;
+      for (let i = 0; i < row.childNodes.length - 1; i++) {
+        const input = document.getElementById(keys[i]);
+        input.value = row.childNodes[i].innerText;
+      }
+    });
     td.appendChild(deleteButton);
-    // td.appendChild(updateButton);
+    td.appendChild(updateButton);
     row.appendChild(td);
     tbody.appendChild(row);
   });
@@ -66,6 +68,6 @@ function deleteUser(id) {
   setUsers(users.filter((user) => user.id !== id));
 }
 
-// function updateUser(data) {
-//   setUsers(users.map((user) => (user.id == data.id ? data : user)));
-// }
+function updateUser(data) {
+  setUsers(users.map((user) => (user.id == data.id ? data : user)));
+}
